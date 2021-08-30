@@ -1,6 +1,9 @@
 # collatz_conjecture_solver
 This repository contains two program folders. each console application will solve for the longest collatz conjecture sequence given an upper limit, one optimizing memory usage, the other CPU run time.
 
+Compiled with 
+       g++ (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
+
 Program 1: Memory Optimized Solver
 
   This program will accept an upper limit value to which the solver will reach before identifying the maximum conjecture sequence length and entry value pair.
