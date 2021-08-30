@@ -3,6 +3,8 @@
 #include <vector>
 #include <sstream>
 using namespace std;
+
+#define DEFAULT_SOLVER_LIMIT 1000000
 /*
 
   Simple maximum_collatz_sequence collatz conjecture sequence identifier
@@ -69,22 +71,28 @@ std::pair<uint32_t, uint32_t> FindLongestCollatzSequence(uint64_t solver_upper_l
 int main(int argc, char *argv[])
 {
 
-    
+    uint64_t upper_bound_argument;
     // Command line input parsing for Collatz conjecture Upper Bound
     // conversion from command line input char* to uint64_t
-    uint64_t upper_bound_argument = atoi(argv[1]);
+    if(argc >= 2)
+    {
+        upper_bound_argument = atoi(argv[1]);
+    }
+    else{
+        upper_bound_argument = DEFAULT_SOLVER_LIMIT;
+    }
     
 
     
     #ifdef EVALUATE_PERFORMANCE
 
 
-    auto clock_start = std::chrono::high_resolution_clock::now();;
-    auto maximum_collatz_sequence = FindLongestCollatzSequence(upper_bound_argument);
-    auto clock_end = std::chrono::high_resolution_clock::now();
-    auto clock_duration = std::chrono::duration_cast<std::chrono::milliseconds>(clock_end - clock_start).count();
-    std::cout << " Maximum sequence entry value : " << maximum_collatz_sequence.first << " : " << maximum_collatz_sequence.second;
-    std::cout << " \n Solver Executation time : " << clock_duration << " milliseconds\n";
+        auto clock_start = std::chrono::high_resolution_clock::now();;
+        auto maximum_collatz_sequence = FindLongestCollatzSequence(upper_bound_argument);
+        auto clock_end = std::chrono::high_resolution_clock::now();
+        auto clock_duration = std::chrono::duration_cast<std::chrono::milliseconds>(clock_end - clock_start).count();
+        std::cout << " Maximum sequence entry value : " << maximum_collatz_sequence.first << " : " << maximum_collatz_sequence.second;
+        std::cout << " \n Solver Executation time : " << clock_duration << " milliseconds\n";
 
     #else
         FindLongestCollatzSequence(upper_bound_argument);
