@@ -3,6 +3,8 @@
 #include <vector>
 #include <sstream>
 using namespace std;
+
+#define DEFAULT_SOLVER_LIMIT 1000000
 /*
 
   Simple maximum_collatz_sequence collatz conjecture sequence identifier optimized for cpu performance time using a vector caching procedure to store all recorded
@@ -73,8 +75,16 @@ std::pair<uint32_t, uint32_t> FindLongestCollatzSequence(std::vector<uint64_t> &
 }
 int main(int argc, char *argv[])
 {
+    uint64_t upper_bound_argument;
     // Command line input parsing for Collatz conjecture Upper Bound
-    uint64_t upper_bound_argument = atoi(argv[1]);
+    // If no argument is given, defualt solver value is DEFAULT_SOLVER_LIMIT
+    if(argc >= 2)
+    {
+        upper_bound_argument = atoi(argv[1]);
+    }
+    else{
+        upper_bound_argument = DEFAULT_SOLVER_LIMIT;
+    }
 
     // Initialize vector for data caching
     // Vector used to store early conjecture sequence lengths to be re-used during solving to reduce computation time
@@ -97,3 +107,4 @@ int main(int argc, char *argv[])
         FindLongestCollatzSequence(cache,upper_bound_argument);
     #endif
 }
+
